@@ -2,5 +2,5 @@
 
 ## Запуск
 
-* Выполняем git clone ...
-* Выполняем команду docker-compose up --build
+* Выполняем `git clone ...`
+* Выполняем команду `docker-compose up --build`
