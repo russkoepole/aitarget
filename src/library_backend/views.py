@@ -1,4 +1,5 @@
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 
 from . import models, serializers
 from .utils import permissions
@@ -18,7 +19,7 @@ class BookListView(generics.ListCreateAPIView):
     """ Класс вида для получения списка всех книг и создания новой"""
     queryset = models.Book.objects.all()
     serializer_class = serializers.BookListSerializer
-    permission_classes = [permissions.IsAdminUserOrReadOnly, ]
+    permission_classes = [permissions.IsAdminUserOrReadOnly, IsAuthenticated]
 
     def get_queryset(self):
         user = self.request.user
@@ -48,7 +49,7 @@ class AuthorListView(generics.ListCreateAPIView):
     """ Класс вида для получения списка всех авторов и создания нового"""
     queryset = models.Author.objects.all()
     serializer_class = serializers.AuthorListSerializer
-    permission_classes = [permissions.IsAdminUserOrReadOnly, ]
+    permission_classes = [permissions.IsAdminUserOrReadOnly, IsAuthenticated]
 
 
 class FollowerListView(generics.ListCreateAPIView):
@@ -87,7 +88,7 @@ class BookDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Book.objects.all()
     serializer_class = serializers.BookDetailSerializer
     lookup_field = 'uuid'
-    permission_classes = [permissions.IsAdminUserOrReadOnly, ]
+    permission_classes = [permissions.IsAdminUserOrReadOnly, IsAuthenticated]
 
 
 class AuthorDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -95,7 +96,7 @@ class AuthorDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Author.objects.all()
     serializer_class = serializers.AuthorDetailSerializer
     lookup_field = 'uuid'
-    permission_classes = [permissions.IsAdminUserOrReadOnly, ]
+    permission_classes = [permissions.IsAdminUserOrReadOnly, IsAuthenticated]
 
 
 class FollowerDetailView(generics.RetrieveUpdateDestroyAPIView):
